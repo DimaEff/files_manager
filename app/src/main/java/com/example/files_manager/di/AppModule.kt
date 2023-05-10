@@ -2,7 +2,6 @@ package com.example.files_manager.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.compose_test.feature_files_manager.data.data_source.FileHashDao
 import com.example.compose_test.feature_files_manager.data.data_source.FileHashDatabase
 import com.example.compose_test.feature_files_manager.data.repository.FileHashRepositoryImpl
 import com.example.compose_test.feature_files_manager.domain.repository.FileHashRepository
@@ -38,7 +37,7 @@ object AppModule {
     fun provideFilesManagerUseCases(repository: FileHashRepository): FilesManagerUseCases =
         FilesManagerUseCases(
             getFilesByPath = GetFilesByPath(),
-            orderFiles = OrderFiles(),
+            orderingFiles = OrderFiles(),
             runIndexingChangedFiles = RunIndexingChangedFiles(repository)
         )
 }

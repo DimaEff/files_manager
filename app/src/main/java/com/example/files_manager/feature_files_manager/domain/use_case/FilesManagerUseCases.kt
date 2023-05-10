@@ -6,6 +6,6 @@ import com.example.compose_test.feature_files_manager.domain.use_case.RunIndexin
 
 data class FilesManagerUseCases(
     val  getFilesByPath: GetFilesByPath,
-    val orderFiles: OrderFiles,
+    val orderingFiles: OrderFiles,
     val runIndexingChangedFiles: RunIndexingChangedFiles,
 )

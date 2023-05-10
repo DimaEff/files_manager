@@ -7,7 +7,7 @@ import java.io.File
 
 class OrderFiles {
     operator fun invoke(
-        files: List<File>,
+        files: Collection<File>,
         filesOrder: FilesOrder = FilesOrder.Size(OrderType.Descending)
     ): List<File> {
         return when(filesOrder) {
@@ -17,7 +17,7 @@ class OrderFiles {
         }
     }
 
-    private fun <T : Comparable<T>>sortByOrderAndProperty(files: List<File>, orderType: OrderType, selector: (File) -> T) = when(orderType) {
+    private fun <T : Comparable<T>>sortByOrderAndProperty(files: Collection<File>, orderType: OrderType, selector: (File) -> T) = when(orderType) {
         is OrderType.Ascending -> files.sortedBy(selector)
         is OrderType.Descending -> files.sortedByDescending(selector)
     }
