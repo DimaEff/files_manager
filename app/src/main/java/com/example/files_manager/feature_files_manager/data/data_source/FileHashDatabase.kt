@@ -6,5 +6,9 @@ import com.example.compose_test.feature_files_manager.domain.models.FileHash
 
 @Database(entities = [FileHash::class], version = 1)
 abstract class FileHashDatabase : RoomDatabase() {
-    abstract val fileHash: FileHashDao
+    abstract val fileHashDao: FileHashDao
+
+    companion object {
+        const val DATABASE_NAME = "filehash_db"
+    }
 }
