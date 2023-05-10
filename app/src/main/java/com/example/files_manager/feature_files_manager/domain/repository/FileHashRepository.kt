@@ -4,7 +4,7 @@ import com.example.compose_test.feature_files_manager.domain.models.FileHash
 import kotlinx.coroutines.flow.Flow
 
 interface FileHashRepository {
-    fun getFilesHashes(): Flow<List<FileHash>>
+    fun getFileHashByPath(path: String): FileHash?
     suspend fun insertFileHash(fileHash: FileHash): Unit
     suspend fun deleteFileHash(fileHash: FileHash): Unit
 }

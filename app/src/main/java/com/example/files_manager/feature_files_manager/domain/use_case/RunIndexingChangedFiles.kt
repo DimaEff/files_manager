@@ -9,17 +9,17 @@ import java.io.File
 class RunIndexingChangedFiles(
     private val repository: FileHashRepository
 ) {
-    suspend operator fun invoke(): Collection<File>  {
+    suspend operator fun invoke(): Collection<File> {
         val changedFiles = mutableListOf<File>()
-        repository.getFilesHashes().collect { previousFilesHashes ->
-            val previousFilesHashesMap = previousFilesHashes.associate { it.path to it.hash }
-            File("/data").walkTopDown().forEach {
-                val filePath = it.absolutePath
-                val fileHash = getFileBodyHash(it)
-                if (fileHash != previousFilesHashesMap[filePath]) {
-                    repository.insertFileHash(FileHash(filePath, fileHash))
-                    changedFiles.add(it)
-                }
+        File("/data").walkTopDown().forEach {
+            val filePath = it.absolutePath
+            val fileHash = getFileBodyHash(it)
+
+            val previousFileHash = repository.getFileHashByPath(filePath)?.hash
+
+            if (fileHash != previousFileHash) {
+                repository.insertFileHash(FileHash(filePath, fileHash))
+                changedFiles.add(it)
             }
         }
 
